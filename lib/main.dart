@@ -1,7 +1,12 @@
 import 'package:flame/game.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+
+import 'package:mario/mario_game.dart';
 
 void main() {
-  final game = FlameGame();
-  runApp(GameWidget(game: game));
+  runApp(
+    const GameWidget<MarioGame>.controlled(
+      gameFactory: MarioGame.new,
+    ),
+  );
 }
