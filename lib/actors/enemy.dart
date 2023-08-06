@@ -4,7 +4,7 @@ import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
 import '../mario_game.dart';
 
-class Enemy extends SpriteComponent with HasGameRef<MarioGame> {
+class Enemy extends SpriteAnimationComponent with HasGameRef<MarioGame> {
   final Vector2 gridPosition;
   double xOffset;
 
@@ -17,19 +17,19 @@ class Enemy extends SpriteComponent with HasGameRef<MarioGame> {
 
   @override
   Future<void> onLoad() async {
-    final enemy = game.images.fromCache('enemy.png');
-    sprite = Sprite(enemy);
-    // animation = SpriteAnimation.fromFrameData(
-    //   game.images.fromCache('water_enemy.png'),
-    //   SpriteAnimationData.sequenced(
-    //     amount: 2,
-    //     textureSize: Vector2.all(16),
-    //     stepTime: 0.70,
-    //   ),
-    // );
+    // final enemy = game.images.fromCache('enemy.png');
+    // sprite = Sprite(enemy);
+    animation = SpriteAnimation.fromFrameData(
+      game.images.fromCache('water_enemy.png'),
+      SpriteAnimationData.sequenced(
+        amount: 2,
+        textureSize: Vector2.all(16),
+        stepTime: 0.70,
+      ),
+    );
     position = Vector2(
       (gridPosition.x * size.x) + xOffset + (size.x / 2),
-      game.size.y - (gridPosition.y * size.y) - (size.y / 20),
+      game.size.y - (gridPosition.y * size.y) - (size.y / 2),
     );
     add(RectangleHitbox()..collisionType = CollisionType.passive);
     add(
